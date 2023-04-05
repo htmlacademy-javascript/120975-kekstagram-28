@@ -9,7 +9,7 @@ const toggleFilter = (choosen) => {
   choosen.classList.add('img-filters__button--active');
 };
 
-const setFilterClick = (data, cb) => {
+const setFilterClickHandler = (data, cb) => {
   filterForm.addEventListener('click', (evt) => {
     switch (evt.target.id) {
       case 'filter-random':
@@ -30,4 +30,4 @@ const setFilterClick = (data, cb) => {
   });
 };
 
-export { setFilterClick };
+export { setFilterClickHandler };

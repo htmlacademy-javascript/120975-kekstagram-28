@@ -38,7 +38,7 @@ const showBigPicture = (info) => {
     commentBlock.textContent = `${commentsVisible.length} из ${commentsCount} комментариев`;
   };
 
-  const OnClickcommentsLoader = () => {
+  const onClickCommentsLoader = () => {
     count += MAX_COUNT_COMMENT;
     showComments();
   };
@@ -51,7 +51,7 @@ const showBigPicture = (info) => {
   const hideBigPicture = () => {
     bigPicture.classList.add('hidden');
     body.classList.remove('modal-open');
-    commentsLoader.removeEventListener('click', OnClickcommentsLoader);
+    commentsLoader.removeEventListener('click', onClickCommentsLoader);
     document.removeEventListener('keydown', onEscKeydown);
     count = 0;
   };
@@ -65,14 +65,13 @@ const showBigPicture = (info) => {
   const addListeners = () => {
     closeButton.addEventListener('click', onCloseButtonClick);
     document.addEventListener('keydown', onEscKeydown);
-    // count = 0;
   };
 
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   showComments(info.comments);
   addListeners();
-  commentsLoader.addEventListener('click', OnClickcommentsLoader);
+  commentsLoader.addEventListener('click', onClickCommentsLoader);
 };
 
-export {showBigPicture};
+export { showBigPicture };

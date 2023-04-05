@@ -7,7 +7,7 @@ uploadedPhoto.addEventListener('change', () => {
   const filePhoto = uploadedPhoto.files[0];
   const filePhotoName = filePhoto.name.toLowerCase();
 
-  const matches = FILE_TYPES.some((it) => filePhotoName.endsWith(it));
+  const matches = FILE_TYPES.some((type) => filePhotoName.endsWith(type));
 
   if (matches) {
     preview.src = URL.createObjectURL(filePhoto);
