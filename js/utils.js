@@ -9,24 +9,6 @@ const getRandomInteger = function (min, max) {
   return Math.floor(result);
 };
 
-const checkStringLength = (string, maxLength) => string.length <= maxLength;
-
-
-const createRandomIdFromRangeGenerator = (min, max) => {
-  const previousValues = [];
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-    if (previousValues.length >= (max - min + 1)) {
-      return null;
-    }
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
-  };
-};
-
 function createIdGenerator () {
   let lastGeneratedId = 0;
 
@@ -92,10 +74,8 @@ const getRandomArray = (array, countElement) => {
 
 export {
   getRandomInteger,
-  createRandomIdFromRangeGenerator,
   createIdGenerator,
   createArrayElement,
-  checkStringLength,
   isEscapeKey,
   showErrorAlert,
   debounce,

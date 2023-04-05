@@ -1,11 +1,14 @@
 import { isEscapeKey } from './utils.js';
+import { onEscKeyDown } from './form.js';
 
 const showMessage = (message, button) => {
   document.body.append(message);
+  document.removeEventListener('keydown', onEscKeyDown);
 
   const close = () => {
     message.remove();
-    window.removeEventListener('keydown', onMessagelEscDown);
+    window.removeEventListener('keydown', onMessageEscKeyDown);
+    document.addEventListener('keydown', onEscKeyDown);
   };
 
   button.addEventListener('click', () => {
@@ -18,13 +21,13 @@ const showMessage = (message, button) => {
     }
   });
 
-  function onMessagelEscDown(evt) {
+  function onMessageEscKeyDown(evt) {
     if(isEscapeKey(evt)) {
       evt.preventDefault();
       close();
     }
   }
-  window.addEventListener('keydown', onMessagelEscDown);
+  window.addEventListener('keydown', onMessageEscKeyDown);
 };
 
 const showSuccessMessage = () => {
@@ -39,4 +42,4 @@ const showUploadErrorMessage = () => {
   showMessage(message, button);
 };
 
-export {showSuccessMessage, showUploadErrorMessage};
+export { showSuccessMessage, showUploadErrorMessage };

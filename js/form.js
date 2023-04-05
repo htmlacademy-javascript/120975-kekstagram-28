@@ -1,7 +1,8 @@
-import { checkStringLength, isEscapeKey } from './utils.js';
+import { isEscapeKey } from './utils.js';
 import { getDefaultValue } from './scale.js';
 import { resetEffects } from './effects.js';
 import { sendData } from './api.js';
+import { showSuccessMessage, showUploadErrorMessage } from './messages.js';
 
 const MAX_LENGTH_COMMENT = 140;
 const MAX_COUNT_HASHTAGS = 5;
@@ -54,7 +55,7 @@ const validateTagCountHashtag = (value) => {
   return validateCountHashtag(hashtagsArray);
 };
 
-const validateComment = (value) => checkStringLength(value, MAX_LENGTH_COMMENT);
+const validateComment = (value) => value.length <= MAX_LENGTH_COMMENT;
 
 pristine.addValidator(hashtagInput, validateTags, `Хэштег должен начинаться с #. Максимальная длина хэштега ${MAX_LENGTH_HASHTAG} символов.`);
 pristine.addValidator(hashtagInput, validateTagCountHashtag, `Разрешено использовать не более ${MAX_COUNT_HASHTAGS} хэштегов.`);
@@ -68,14 +69,15 @@ const hideForm = () => {
   pristine.reset();
   uploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onEscKeyDown);
 };
 
-const onEscKeyDown = (evt) => {
+function onEscKeyDown (evt) {
   if (isEscapeKey(evt) && !checkForFocus()) {
     evt.preventDefault();
     hideForm();
   }
-};
+}
 
 const showForm = () => {
   uploadOverlay.classList.remove('hidden');
@@ -89,8 +91,8 @@ const onFileInputChange = () => {
   showForm();
 };
 
-const oncloselButtonClick = () => {
-  hideForm ();
+const onCloseButtonClick = () => {
+  hideForm();
 };
 
 const blockSubmitButton = () => {
@@ -110,12 +112,12 @@ const onFormSubmit = (evt) => {
   if(isValid) {
     blockSubmitButton();
     const formData = new FormData(evt.target);
-    sendData(formData);
+    sendData(formData, showSuccessMessage, showUploadErrorMessage, hideForm, unblockSubmitButton);
   }
 };
 
 fileField.addEventListener('change', onFileInputChange);
-cancelButtonRenderPicture.addEventListener('click', oncloselButtonClick);
+cancelButtonRenderPicture.addEventListener('click', onCloseButtonClick);
 form.addEventListener('submit', onFormSubmit);
 
-export { hideForm, unblockSubmitButton };
+export { hideForm, unblockSubmitButton, onEscKeyDown };

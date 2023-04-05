@@ -1,6 +1,3 @@
-import { showSuccessMessage, showUploadErrorMessage } from './messages.js';
-import { hideForm, unblockSubmitButton } from './form.js';
-
 const getData = (onSuccess, onFail) => {
   fetch('https://28.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
@@ -10,7 +7,7 @@ const getData = (onSuccess, onFail) => {
     .catch(() => onFail('Произошла ошибка при загрузки данных'));
 };
 
-const sendData = (data) => {
+const sendData = (data, success, error, hide, button) => {
   fetch(
     'https://28.javascript.pages.academy/kekstagram',
     {
@@ -24,13 +21,13 @@ const sendData = (data) => {
     throw new Error(`${response.status} ${response.statusText}`);
   })
     .then(() => {
-      showSuccessMessage();
-      hideForm();
+      success();
+      hide();
     })
     .catch(() => {
-      showUploadErrorMessage();
+      error();
     })
-    .finally(unblockSubmitButton);
+    .finally(button);
 };
 
 export { getData, sendData };

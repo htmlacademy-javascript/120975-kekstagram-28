@@ -30,12 +30,14 @@ const createPicture = ({url, description, comments, likes}) => {
 const container = document.querySelector('.pictures');
 
 const showPictures = (pictures) => {
+  const fragment = document.createDocumentFragment();
   clearPictures();
   pictures.forEach((picture) => {
     const pictureElement = createPicture(picture);
-    container.append(pictureElement);
+    fragment.append(pictureElement);
     imageFilters.classList.remove('img-filters--inactive');
   });
+  container.append(fragment);
 };
 
 export { showPictures };
