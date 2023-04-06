@@ -1,5 +1,5 @@
 import { isEscapeKey } from './utils.js';
-import { onEscKeyDown } from './form.js';
+import { onEscKeyDown, hideForm } from './form.js';
 
 const showMessage = (message, button) => {
   document.body.append(message);
@@ -34,6 +34,7 @@ const showSuccessMessage = () => {
   const message = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
   const button = message.querySelector('.success__button');
   showMessage(message, button);
+  hideForm();
 };
 
 const showUploadErrorMessage = () => {

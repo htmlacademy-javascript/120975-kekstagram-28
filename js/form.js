@@ -39,19 +39,21 @@ const validateDoubleHashtag = (value) => {
   return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
+const getHashtagsArray = (value) => value.trim().split(' ').filter((tag) => tag.trim().length);
+
 const validateCountHashtag = (value) => value.length <= MAX_COUNT_HASHTAGS;
 const validateTags = (value) => {
-  const hashtagsArray = value.trim().split(' ').filter((tag) => tag.trim().length);
+  const hashtagsArray = getHashtagsArray(value);
   return hashtagsArray.every(validateSymbolsHashtag);
 };
 
 const validateTagDouble = (value) => {
-  const hashtagsArray = value.trim().split(' ').filter((tag) => tag.trim().length);
+  const hashtagsArray = getHashtagsArray(value);
   return validateDoubleHashtag(hashtagsArray);
 };
 
 const validateTagCountHashtag = (value) => {
-  const hashtagsArray = value.trim().split(' ').filter((tag) => tag.trim().length);
+  const hashtagsArray = getHashtagsArray(value);
   return validateCountHashtag(hashtagsArray);
 };
 
@@ -105,14 +107,13 @@ const unblockSubmitButton = () => {
   formSubmitButton.disabled = false;
 };
 
-
 const onFormSubmit = (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
   if(isValid) {
     blockSubmitButton();
     const formData = new FormData(evt.target);
-    sendData(formData, showSuccessMessage, showUploadErrorMessage, hideForm, unblockSubmitButton);
+    sendData(formData, showSuccessMessage, showUploadErrorMessage, unblockSubmitButton);
   }
 };
 
