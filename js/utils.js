@@ -9,19 +9,6 @@ const getRandomInteger = function (min, max) {
   return Math.floor(result);
 };
 
-function createIdGenerator () {
-  let lastGeneratedId = 0;
-
-  return function () {
-    lastGeneratedId += 1;
-    return lastGeneratedId;
-  };
-}
-
-const createArrayElement = (elements) => (
-  elements[getRandomInteger(0, elements.length - 1)]
-);
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const showErrorAlert = (message) => {
@@ -73,9 +60,6 @@ const getRandomArray = (array, countElement) => {
 };
 
 export {
-  getRandomInteger,
-  createIdGenerator,
-  createArrayElement,
   isEscapeKey,
   showErrorAlert,
   debounce,

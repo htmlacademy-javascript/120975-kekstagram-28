@@ -7,7 +7,7 @@ const getData = (onSuccess, onFail) => {
     .catch(() => onFail('Произошла ошибка при загрузки данных'));
 };
 
-const sendData = (data, success, error, hide, button) => {
+const sendData = (data, success, error, onLoadFinish) => {
   fetch(
     'https://28.javascript.pages.academy/kekstagram',
     {
@@ -22,12 +22,11 @@ const sendData = (data, success, error, hide, button) => {
   })
     .then(() => {
       success();
-      hide();
     })
     .catch(() => {
       error();
     })
-    .finally(button);
+    .finally(onLoadFinish);
 };
 
 export { getData, sendData };
