@@ -7,7 +7,7 @@ const btnScaleBigger = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
 const pictureSize = document.querySelector('.img-upload__preview img');
 
-let scale;
+let scale = 0;
 
 const changePictureSize = () => {
   pictureSize.style.transform = `scale(${scale / 100})`;
