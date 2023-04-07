@@ -1,7 +1,7 @@
 import { sortDiscussed, getRandomArray } from './utils.js';
 
-const filterForm = document.querySelector('.img-filters');
 const COUNT_RANDOM_PHOTO = 10;
+const filterForm = document.querySelector('.img-filters');
 
 const toggleFilter = (choosen) => {
   const currentFilter = document.querySelector('.img-filters__button--active');
