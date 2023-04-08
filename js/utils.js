@@ -51,12 +51,12 @@ const getRandomArray = (array, countElement) => {
     return array;
   }
 
-  let arrayResults = [];
-  while (arrayResults.length !== countElement) {
-    arrayResults.push(getRandomElementArray(array));
-    arrayResults = Array.from(new Set(arrayResults));
+  let arrayElements = [];
+  while (arrayElements.length !== countElement) {
+    arrayElements.push(getRandomElementArray(array));
+    arrayElements = Array.from(new Set(arrayElements));
   }
-  return arrayResults;
+  return arrayElements;
 };
 
 export {
