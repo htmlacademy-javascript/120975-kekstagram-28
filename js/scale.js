@@ -10,7 +10,8 @@ const pictureSize = document.querySelector('.img-upload__preview img');
 let scale = 0;
 
 const changePictureSize = () => {
-  pictureSize.style.transform = `scale(${scale / 100})`;
+  const scaleParam = scale / 100;
+  pictureSize.style.transform = `scale(${scaleParam})`;
   scaleValue.value = `${scale}%`;
 };
 
